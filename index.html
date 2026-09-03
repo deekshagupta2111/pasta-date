@@ -56,6 +56,7 @@
       cursor:pointer;transition:transform .15s,box-shadow .15s; text-align:left;
     }
     button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(70,43,27,.12)}
+    button:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
     .yes{background:var(--tomato);color:white}.maybe{background:#e8f0e4;color:#30452d}.no{background:#f0e7dd;color:#654f43}
     .choice-sub{display:block;font-weight:400;font-size:.82rem;opacity:.82;margin-top:4px}
     .note{font-size:.92rem;line-height:1.6;color:#6c584d}
@@ -81,8 +82,8 @@
     <div class="tiny">Official Domestic Culinary Invitation · September 3</div>
     <h1>Will you come over & <span class="accent">make pasta</span> with me?</h1>
     <p class="lede">
-      You have been formally invited to an evening of my special kitchen techniques,
-      small packets of fun and entertainment, and spending time together.
+      You have been formally invited to an evening of questionable kitchen technique,
+      excellent carbs, aggressive parmesan usage, and spending time together.
     </p>
     <div class="chips">
       <span class="chip">🍝 Pasta</span><span class="chip">🧄 Garlic</span>
@@ -106,23 +107,24 @@
       <h2>Time is of the essence</h2>
       <div class="timer" id="timer">00:00:00</div>
       <small>until tonight's pasta window</small>
+      <p class="note">Countdown is set to 6:30 PM in your browser's local time. If he opens this after that, it simply becomes a countdown to tomorrow—because pasta waits for no one.</p>
     </section>
   </div>
 
   <section class="card" style="margin-top:24px">
     <div class="tiny">RSVP · very important government business</div>
     <h2>So... are you coming?</h2>
-    <p class="note">Choose your answer. Your RSVP will open a pre-filled GitHub issue so there is an official record of this historic decision.</p>
-    <div class="choices">
-      <button class="yes" onclick="rsvp('YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).')">
+    <p class="note">Choose your answer below — it's recorded automatically, no extra steps needed.</p>
+    <div class="choices" id="choices">
+      <button class="yes" onclick="rsvp('YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).', this)">
         YES, obviously 🍝
         <span class="choice-sub">I accept this extremely serious invitation.</span>
       </button>
-      <button class="maybe" onclick="rsvp('MAYBE — negotiating with the pasta gods 🤔','I might be able to make it. Please keep a tiny bit of hope alive.')">
+      <button class="maybe" onclick="rsvp('MAYBE — negotiating with the pasta gods 🤔','I might be able to make it. Please keep a tiny bit of hope alive.', this)">
         Maybe... 🤔
         <span class="choice-sub">I need to check my schedule / summon the pasta gods.</span>
       </button>
-      <button class="no" onclick="rsvp('NOT TODAY — rain check 😔','Not today, but I would like a rain check on the pasta date.')">
+      <button class="no" onclick="rsvp('NOT TODAY — rain check 😔','Not today, but I would like a rain check on the pasta date.', this)">
         Not today 🥲
         <span class="choice-sub">I regret this already. Please offer me a rain check.</span>
       </button>
@@ -142,31 +144,49 @@
 </div>
 
 <script>
-  
-  const GITHUB_REPO = "deekshagupta2111/pasta-date";
+  const FORMSPREE_URL = "https://formspree.io/f/xkjnbpky";
 
-  function rsvp(title, body){
-    const issueUrl =
-      `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-    const modal = document.getElementById('modal');
-    document.getElementById('modalEmoji').textContent = title.startsWith('YES') ? '🍝💚' : title.startsWith('MAYBE') ? '👀' : '🥲';
-    document.getElementById('modalTitle').textContent = title.startsWith('YES') ? 'YOU SAID YES!!!' : title.startsWith('MAYBE') ? 'Intriguing...' : 'A tragic development.';
-    document.getElementById('modalText').textContent = 'Click below to open the official RSVP form on GitHub. Then press “Submit new issue” to record your answer.';
-    modal.classList.add('open');
-    window._pendingIssueUrl = issueUrl;
-    if(title.startsWith('YES')) confetti();
+  async function rsvp(title, body, btnEl){
+    // Disable all choice buttons while we submit, so it can't be double-clicked
+    const buttons = document.querySelectorAll('#choices button');
+    buttons.forEach(b => b.disabled = true);
+
+    const emoji = title.startsWith('YES') ? '🍝💚' : title.startsWith('MAYBE') ? '👀' : '🥲';
+    const modalTitle = title.startsWith('YES') ? 'YOU SAID YES!!!' : title.startsWith('MAYBE') ? 'Intriguing...' : 'A tragic development.';
+
+    document.getElementById('modalEmoji').textContent = emoji;
+    document.getElementById('modalTitle').textContent = modalTitle;
+    document.getElementById('modalText').textContent = 'Recording your answer...';
+    document.getElementById('modal').classList.add('open');
+
+    try{
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ rsvp: title, message: body })
+      });
+
+      if(res.ok){
+        document.getElementById('modalText').textContent = 'Your RSVP has been recorded. No further steps needed 🍝';
+        if(title.startsWith('YES')) confetti();
+      } else {
+        document.getElementById('modalText').textContent = 'Hmm, something went wrong recording that — but your answer was: ' + title;
+      }
+    } catch(err){
+      document.getElementById('modalText').textContent = 'Could not reach the RSVP form (check your connection). Your answer was: ' + title;
+    }
   }
+
   document.getElementById('modal').addEventListener('click', e => {
     if(e.target.id === 'modal') closeModal();
   });
   function closeModal(){
     document.getElementById('modal').classList.remove('open');
-    if(window._pendingIssueUrl) window.open(window._pendingIssueUrl,'_blank','noopener');
   }
 
   function updateTimer(){
     const now = new Date(), target = new Date(now);
-    target.setHours(16,0,0,0);
+    target.setHours(18,30,0,0);
     if(target <= now) target.setDate(target.getDate()+1);
     const diff = target-now;
     const h=String(Math.floor(diff/3600000)).padStart(2,'0');
