@@ -185,7 +185,7 @@
 
   function updateTimer(){
     const now = new Date(), target = new Date(now);
-    target.setHours(14,0,0,0);
+    target.setHours(16,0,0,0);
     if(target <= now) target.setDate(target.getDate()+1);
     const diff = target-now;
     const h=String(Math.floor(diff/3600000)).padStart(2,'0');
