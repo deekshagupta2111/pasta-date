@@ -115,7 +115,7 @@
     <h2>So... are you coming?</h2>
     <p class="note">Choose your answer below — 👉👈</p>
     <div class="choices" id="choices">
-      <button class="yes" onclick="rsvp('YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).', this)">
+      <button class="yes" onclick="rsvp('HEHE YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).', this)">
         YES, obviously 🍝
         <span class="choice-sub">I accept this extremely serious invitation.</span>
       </button>
@@ -166,7 +166,7 @@
       });
 
       if(res.ok){
-        document.getElementById('modalText').textContent = 'Your RSVP has been recorded. No further steps needed 🍝';
+        document.getElementById('modalText').textContent = 'Your RSVP has been recorded! 🍝';
         if(title.startsWith('YES')) confetti();
       } else {
         document.getElementById('modalText').textContent = 'Hmm, something went wrong recording that — but your answer was: ' + title;
