@@ -82,14 +82,14 @@
     <div class="tiny">Official Domestic Culinary Invitation · September 3</div>
     <h1>Will you come over & <span class="accent">make pasta</span> with me?</h1>
     <p class="lede">
-      You have been formally invited to an evening of questionable kitchen technique,
-      excellent carbs, aggressive parmesan usage, and spending time together.
+      You have been formally invited to an evening of my special kitchen technique,
+      tiny packets of fun and entertainment, and spending time together.
     </p>
     <div class="chips">
       <span class="chip">🍝 Pasta</span><span class="chip">🧄 Garlic</span>
-      <span class="chip">🧀 Too much cheese</span><span class="chip">💋 Post-dinner activities*</span>
+      <span class="chip">🧀 Too much cheese</span><span class="chip">💋 Post-meal activities*</span>
     </div>
-    <p class="note">*Subject to mutual enthusiasm and the mysterious laws of the evening.</p>
+    <p class="note">*Subject to mutual enthusiasm and a masti-ful evening.</p>
   </section>
 
   <div class="section">
@@ -107,14 +107,13 @@
       <h2>Time is of the essence</h2>
       <div class="timer" id="timer">00:00:00</div>
       <small>until tonight's pasta window</small>
-      <p class="note">Countdown is set to 6:30 PM in your browser's local time. If he opens this after that, it simply becomes a countdown to tomorrow—because pasta waits for no one.</p>
     </section>
   </div>
 
   <section class="card" style="margin-top:24px">
     <div class="tiny">RSVP · very important government business</div>
     <h2>So... are you coming?</h2>
-    <p class="note">Choose your answer below — it's recorded automatically, no extra steps needed.</p>
+    <p class="note">Choose your answer below — 👉👈</p>
     <div class="choices" id="choices">
       <button class="yes" onclick="rsvp('YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).', this)">
         YES, obviously 🍝
@@ -125,7 +124,7 @@
         <span class="choice-sub">I need to check my schedule / summon the pasta gods.</span>
       </button>
       <button class="no" onclick="rsvp('NOT TODAY — rain check 😔','Not today, but I would like a rain check on the pasta date.', this)">
-        Not today 🥲
+        Not today 😛
         <span class="choice-sub">I regret this already. Please offer me a rain check.</span>
       </button>
     </div>
@@ -186,7 +185,7 @@
 
   function updateTimer(){
     const now = new Date(), target = new Date(now);
-    target.setHours(18,30,0,0);
+    target.setHours(14,0,0,0);
     if(target <= now) target.setDate(target.getDate()+1);
     const diff = target-now;
     const h=String(Math.floor(diff/3600000)).padStart(2,'0');
