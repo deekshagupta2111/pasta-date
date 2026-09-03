@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>🍝 A Very Important Pasta Invitation</title>
+  <meta name="description" content="An extremely serious invitation to come over and make pasta together.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --cream:#fff8ed; --ink:#2d211b; --tomato:#d94a32; --tomato-dark:#a93424;
+      --sage:#7d9875; --gold:#e7a83e; --paper:#fffdf8;
+      --shadow:0 18px 50px rgba(70,43,27,.14);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; color:var(--ink); background:
+      radial-gradient(circle at 15% 15%, #ffe2c8 0 8%, transparent 8.5%),
+      radial-gradient(circle at 85% 12%, #dfead9 0 9%, transparent 9.5%),
+      linear-gradient(135deg,#fff9ef,#f7f1e6);
+      font-family:"DM Sans",system-ui,sans-serif;
+    }
+    .wrap{width:min(980px,92vw);margin:auto;padding:42px 0 70px}
+    .tiny{letter-spacing:.16em;text-transform:uppercase;font-size:.72rem;font-weight:700;color:var(--tomato)}
+    .chef-header{margin:-8px 0 28px;position:relative;border-radius:22px;overflow:hidden;background:#eee2d2}
+    .chef-header img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+    .chef-caption{position:absolute;left:16px;bottom:16px;background:rgba(255,253,248,.94);padding:10px 15px;border-radius:999px;font-size:.9rem;box-shadow:0 6px 18px rgba(45,33,27,.14)}
+
+    .hero{
+      background:rgba(255,253,248,.82); border:1px solid rgba(45,33,27,.08);
+      border-radius:32px; padding:clamp(28px,6vw,68px); box-shadow:var(--shadow);
+      position:relative; overflow:hidden;
+    }
+    .hero:before{content:"🍅";position:absolute;right:5%;top:5%;font-size:clamp(3rem,9vw,7rem);transform:rotate(13deg);opacity:.18}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(3.2rem,8vw,6.8rem);line-height:.92;margin:12px 0 22px;max-width:760px}
+    .accent{color:var(--tomato)}
+    .lede{font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.65;max-width:670px;margin-bottom:30px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 8px}
+    .chip{background:#f3e8d7;border-radius:999px;padding:9px 13px;font-size:.9rem}
+    .section{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .card{
+      background:rgba(255,253,248,.9);border:1px solid rgba(45,33,27,.08);
+      border-radius:24px;padding:26px;box-shadow:0 10px 30px rgba(70,43,27,.07)
+    }
+    .card h2{font-family:"Playfair Display",serif;margin:0 0 12px;font-size:1.7rem}
+    .agenda{display:grid;gap:12px;margin-top:16px}
+    .row{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff8ed;border-radius:15px}
+    .row b{min-width:72px;color:var(--tomato)}
+    .timer{font-variant-numeric:tabular-nums;font-size:2.2rem;font-weight:700;margin:12px 0 2px}
+    .timer small{font-size:.85rem;font-weight:500;opacity:.7}
+    .choices{display:grid;gap:12px;margin-top:18px}
+    button,.button{
+      border:0;border-radius:16px;padding:16px 18px;font:700 1rem "DM Sans",sans-serif;
+      cursor:pointer;transition:transform .15s,box-shadow .15s; text-align:left;
+    }
+    button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(70,43,27,.12)}
+    .yes{background:var(--tomato);color:white}.maybe{background:#e8f0e4;color:#30452d}.no{background:#f0e7dd;color:#654f43}
+    .choice-sub{display:block;font-weight:400;font-size:.82rem;opacity:.82;margin-top:4px}
+    .note{font-size:.92rem;line-height:1.6;color:#6c584d}
+    .footer{text-align:center;margin-top:28px;font-size:.82rem;color:#806e63}
+    .modal{position:fixed;inset:0;background:rgba(45,33,27,.5);display:none;place-items:center;padding:20px;z-index:10}
+    .modal.open{display:grid}
+    .modal-box{max-width:520px;background:var(--paper);border-radius:28px;padding:32px;box-shadow:0 30px 80px rgba(0,0,0,.2);text-align:center}
+    .modal-box h2{font:800 2.4rem "Playfair Display",serif;margin:8px 0}
+    .big-emoji{font-size:4rem}
+    .close{background:#eee1d6;color:var(--ink);margin-top:16px;text-align:center}
+    .confetti{position:fixed;top:-20px;font-size:20px;z-index:20;animation:fall 1.8s ease-in forwards;pointer-events:none}
+    @keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:0}}
+    @media(max-width:720px){.section{grid-template-columns:1fr}.hero{border-radius:24px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <div class="chef-header">
+      <img src="ratatouille-chef.webp" alt="Ratatouille chef waving from a kitchen">
+      <div class="chef-caption">Tonight's special: <strong>Pasta for Two</strong> 🍝</div>
+    </div>
+    <div class="tiny">Official Domestic Culinary Invitation · September 3</div>
+    <h1>Will you come over & <span class="accent">make pasta</span> with me?</h1>
+    <p class="lede">
+      You have been formally invited to an evening of questionable kitchen technique,
+      excellent carbs, aggressive parmesan usage, and spending time together.
+    </p>
+    <div class="chips">
+      <span class="chip">🍝 Pasta</span><span class="chip">🧄 Garlic</span>
+      <span class="chip">🧀 Too much cheese</span><span class="chip">💋 Post-dinner activities*</span>
+    </div>
+    <p class="note">*Subject to mutual enthusiasm and the mysterious laws of the evening.</p>
+  </section>
+
+  <div class="section">
+    <section class="card">
+      <h2>The highly scientific plan</h2>
+      <div class="agenda">
+        <div class="row"><b>6:30-ish</b><span>Arrive looking cute</span></div>
+        <div class="row"><b>7:00-ish</b><span>Put on music & start cooking</span></div>
+        <div class="row"><b>8:00-ish</b><span>Eat the pasta we definitely didn't overcook</span></div>
+        <div class="row"><b>Later</b><span>Absolutely no plans whatsoever ✨</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Time is of the essence</h2>
+      <div class="timer" id="timer">00:00:00</div>
+      <small>until tonight's pasta window</small>
+      <p class="note">Countdown is set to 6:30 PM in your browser's local time. If he opens this after that, it simply becomes a countdown to tomorrow—because pasta waits for no one.</p>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:24px">
+    <div class="tiny">RSVP · very important government business</div>
+    <h2>So... are you coming?</h2>
+    <p class="note">Choose your answer. Your RSVP will open a pre-filled GitHub issue so there is an official record of this historic decision.</p>
+    <div class="choices">
+      <button class="yes" onclick="rsvp('YES — pasta date! 🍝','I am coming over for pasta. Save me a seat (and some cheese).')">
+        YES, obviously 🍝
+        <span class="choice-sub">I accept this extremely serious invitation.</span>
+      </button>
+      <button class="maybe" onclick="rsvp('MAYBE — negotiating with the pasta gods 🤔','I might be able to make it. Please keep a tiny bit of hope alive.')">
+        Maybe... 🤔
+        <span class="choice-sub">I need to check my schedule / summon the pasta gods.</span>
+      </button>
+      <button class="no" onclick="rsvp('NOT TODAY — rain check 🥲','Not today, but I would like a rain check on the pasta date.')">
+        Not today 🥲
+        <span class="choice-sub">I regret this already. Please offer me a rain check.</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="footer">Made with love, garlic, and a suspicious amount of parmesan.</div>
+</main>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="big-emoji" id="modalEmoji">🍝</div>
+    <h2 id="modalTitle">Excellent choice.</h2>
+    <p id="modalText">Your official RSVP is ready.</p>
+    <button class="close" onclick="closeModal()">Back to the invite</button>
+  </div>
+</div>
+
+<script>
+  /*
+    SET THIS before publishing:
+    Replace YOUR_GITHUB_USERNAME and YOUR_REPOSITORY with the GitHub repo
+    where this invite lives, e.g. "deeksha/pasta-date".
+  */
+  const GITHUB_REPO = "YOUR_GITHUB_USERNAME/YOUR_REPOSITORY";
+
+  function rsvp(title, body){
+    const issueUrl =
+      `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+    const modal = document.getElementById('modal');
+    document.getElementById('modalEmoji').textContent = title.startsWith('YES') ? '🍝💚' : title.startsWith('MAYBE') ? '👀' : '🥲';
+    document.getElementById('modalTitle').textContent = title.startsWith('YES') ? 'YOU SAID YES!!!' : title.startsWith('MAYBE') ? 'Intriguing...' : 'A tragic development.';
+    document.getElementById('modalText').textContent = 'Click below to open the official RSVP form on GitHub. Then press “Submit new issue” to record your answer.';
+    modal.classList.add('open');
+    window._pendingIssueUrl = issueUrl;
+    if(title.startsWith('YES')) confetti();
+  }
+  document.getElementById('modal').addEventListener('click', e => {
+    if(e.target.id === 'modal') closeModal();
+  });
+  function closeModal(){
+    document.getElementById('modal').classList.remove('open');
+    if(window._pendingIssueUrl) window.open(window._pendingIssueUrl,'_blank','noopener');
+  }
+
+  function updateTimer(){
+    const now = new Date(), target = new Date(now);
+    target.setHours(18,30,0,0);
+    if(target <= now) target.setDate(target.getDate()+1);
+    const diff = target-now;
+    const h=String(Math.floor(diff/3600000)).padStart(2,'0');
+    const m=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+    const s=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+    document.getElementById('timer').textContent=`${h}:${m}:${s}`;
+  }
+  updateTimer(); setInterval(updateTimer,1000);
+
+  function confetti(){
+    const bits=['🍝','🍅','🧀','✨','💚','🧄'];
+    for(let i=0;i<34;i++){
+      const el=document.createElement('div'); el.className='confetti';
+      el.textContent=bits[Math.floor(Math.random()*bits.length)];
+      el.style.left=Math.random()*100+'vw';
+      el.style.animationDelay=Math.random()*.35+'s';
+      el.style.transform=`rotate(${Math.random()*180}deg)`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),2200);
+    }
+  }
+</script>
+</body>
+</html>
