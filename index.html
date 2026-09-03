@@ -81,8 +81,8 @@
     <div class="tiny">Official Domestic Culinary Invitation · September 3</div>
     <h1>Will you come over & <span class="accent">make pasta</span> with me?</h1>
     <p class="lede">
-      You have been formally invited to an evening of questionable kitchen technique,
-      excellent carbs, aggressive parmesan usage, and spending time together.
+      You have been formally invited to an evening of my special kitchen techniques,
+      small packets of fun and entertainment, and spending time together.
     </p>
     <div class="chips">
       <span class="chip">🍝 Pasta</span><span class="chip">🧄 Garlic</span>
@@ -95,9 +95,9 @@
     <section class="card">
       <h2>The highly scientific plan</h2>
       <div class="agenda">
-        <div class="row"><b>6:30-ish</b><span>Arrive looking cute</span></div>
-        <div class="row"><b>7:00-ish</b><span>Put on music & start cooking</span></div>
-        <div class="row"><b>8:00-ish</b><span>Eat the pasta we definitely didn't overcook</span></div>
+        <div class="row"><b>4:00-ish</b><span>Arrive looking cute</span></div>
+        <div class="row"><b>4:15-ish</b><span>Put on music & start cooking</span></div>
+        <div class="row"><b>5:00-ish</b><span>Eat the pasta and DO NOT CRITIZE 🔪</span></div>
         <div class="row"><b>Later</b><span>Absolutely no plans whatsoever ✨</span></div>
       </div>
     </section>
@@ -123,14 +123,14 @@
         Maybe... 🤔
         <span class="choice-sub">I need to check my schedule / summon the pasta gods.</span>
       </button>
-      <button class="no" onclick="rsvp('NOT TODAY — rain check 🥲','Not today, but I would like a rain check on the pasta date.')">
+      <button class="no" onclick="rsvp('NOT TODAY — rain check 😔','Not today, but I would like a rain check on the pasta date.')">
         Not today 🥲
         <span class="choice-sub">I regret this already. Please offer me a rain check.</span>
       </button>
     </div>
   </section>
 
-  <div class="footer">Made with love, garlic, and a suspicious amount of parmesan.</div>
+  <div class="footer">Made with love, garlic and sprinkles of Catch Black Pepper.</div>
 </main>
 
 <div class="modal" id="modal">
@@ -143,12 +143,8 @@
 </div>
 
 <script>
-  /*
-    SET THIS before publishing:
-    Replace YOUR_GITHUB_USERNAME and YOUR_REPOSITORY with the GitHub repo
-    where this invite lives, e.g. "deeksha/pasta-date".
-  */
-  const GITHUB_REPO = "YOUR_GITHUB_USERNAME/YOUR_REPOSITORY";
+  
+  const GITHUB_REPO = "deekshagupta2111/pasta-date";
 
   function rsvp(title, body){
     const issueUrl =
@@ -171,7 +167,7 @@
 
   function updateTimer(){
     const now = new Date(), target = new Date(now);
-    target.setHours(18,30,0,0);
+    target.setHours(16,0,0,0);
     if(target <= now) target.setDate(target.getDate()+1);
     const diff = target-now;
     const h=String(Math.floor(diff/3600000)).padStart(2,'0');
